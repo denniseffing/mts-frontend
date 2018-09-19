@@ -43,7 +43,7 @@ export class UserAreaService {
           if (data) {
             const user: any = {
               nickname: data.nickname,
-              role:  data['http://app.example.com/group'],
+              role:  data['http://mts.local/group'],
             };
 
             this.setSession(authResult, user);
