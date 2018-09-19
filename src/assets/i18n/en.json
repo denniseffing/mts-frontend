@@ -37,7 +37,10 @@
       "registerSuccess": "Register successful",
       "registerFail": "Register failed, username already in use",
       "logoutSuccess": "Log out successful, come back soon!"
-    }
+    },
+    "fetchMenusError": "Dishes are currently not available.",
+    "fetchMenusOfOrdersError": "The dishes of this order are currently not available.",
+    "tryAgain": "Please try again later."
   },
   "formFields": {
     "username": "Username",

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSlider, MatInput } from '@angular/material';
-import { Observable } from 'rxjs';
 import { MenuService } from './shared/menu.service';
 import { DishView } from '../shared/viewModels/interfaces';
 import { Filter } from '../shared/backendModels/interfaces';
+import { LoadingWrapper } from '../shared/loadingWrapper';
 
 @Component({
   selector: 'public-menu',
@@ -12,7 +12,7 @@ import { Filter } from '../shared/backendModels/interfaces';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  menus: Observable<DishView[]>;
+  menus: LoadingWrapper<DishView[]>;
   sortDir: string = 'DESC';
   sortDirIcon: string = 'vertical_align_bottom';
 
@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit {
       filters,
       this.sortDir,
     );
-    this.menus = this.menuService.getDishes(composedFilters);
+    this.menus = new LoadingWrapper(this.menuService.getDishes(composedFilters));
   }
 
   clearFilters(form: FormGroup, price: MatSlider, likes: MatSlider): void {

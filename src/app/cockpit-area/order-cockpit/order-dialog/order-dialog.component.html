@@ -15,15 +15,20 @@
     </div>
   </ng-template>
 </td-data-table>
-<td-data-table
-  #dataOrders
-  [data]="filteredData"
-  [columns]="columnso">
-</td-data-table>
-<div layout="row" class="justify-space-between pad-right pad-left">
-  <h4 class="text-upper">{{'formFields.total' | translate}}</h4>
-  <h4>{{totalPrice | number : '2.2-2'}}</h4>
+<div *ngIf="filteredData.length > 0; else error">
+    <td-data-table
+    #dataOrders
+    [data]="filteredData"
+    [columns]="columnso">
+  </td-data-table>
+  <div layout="row" class="justify-space-between pad-right pad-left">
+    <h4 class="text-upper">{{'formFields.total' | translate}}</h4>
+    <h4>{{totalPrice | number : '2.2-2'}}</h4>
+  </div>
 </div>
+<ng-template #error>
+    <public-error-message title="alerts.fetchMenusOfOrdersError" subtitle="alerts.tryAgain"></public-error-message>
+  </ng-template>
 <mat-divider></mat-divider>
 <td-paging-bar #pagingBar [firstLast]="false" [pageSize]="pageSize" [total]="datao.length" (change)="page($event)">
   <span hide-xs>{{'table.rowsPage' | translate}}:</span>

@@ -9,6 +9,7 @@ import { MenuCardComponent } from './menu-card/menu-card.component';
 import { MenuComponent } from './menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
   ],
   providers: [
     MenuService,

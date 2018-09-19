@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { WaiterCockpitService } from './shared/waiter-cockpit.service';
 import { WindowService } from '../core/windowService/windowService.service';
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     HttpClientModule,
     TranslateModule,
     CoreModule,
+    SharedModule,
   ],
   providers: [
     WaiterCockpitService,

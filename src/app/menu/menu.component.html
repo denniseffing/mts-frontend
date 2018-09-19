@@ -92,16 +92,21 @@
       </div>
   </form>
 
-  <div flex layout="row" *ngIf="(menus | async)?.result as allMenus; else loading" class="justify-space-around flex-wrap">
+  <div flex layout="row" *ngIf="(menus.data$ | async)?.result as allMenus; else loadingOrError" class="justify-space-around flex-wrap">
     <public-menu-card *ngFor="let menu of allMenus" [menu]="menu"></public-menu-card>
   </div>
 
-  <ng-template #loading>
-    <mat-progress-bar
-      #loading
-      color="accent"
-      mode="indeterminate">
-    </mat-progress-bar>
-  </ng-template>
+  <ng-template #loadingOrError>
+    <div flex layout="row" *ngIf="menus.errorLoading$ | async; else loading" class="justify-space-around flex-wrap">
+      <public-error-message title="alerts.fetchMenusError" subtitle="alerts.tryAgain"></public-error-message>
+    </div>
 
+    <ng-template #loading>
+      <mat-progress-bar
+        #loading
+        color="accent"
+        mode="indeterminate">
+      </mat-progress-bar>
+    </ng-template>    
+  </ng-template>
 </td-layout>

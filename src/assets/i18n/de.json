@@ -39,7 +39,10 @@
       "registerFail":
         "Registrierung fehlgeschlagen, Benutzername bereits in Verwendung",
       "logoutSuccess": "Abmeldung erfolgreich, komme bald wieder!"
-    }
+    },
+    "fetchMenusError": "Unsere Speisekarte ist derzeit leider nicht verfügbar.",
+    "fetchMenusOfOrdersError": "Die Gerichte dieser Bestellung können derzeit leider nicht abgerufen werden.",
+    "tryAgain": "Bitte versuchen Sie es später noch einmal."
   },
   "formFields": {
     "username": "Benutzername",

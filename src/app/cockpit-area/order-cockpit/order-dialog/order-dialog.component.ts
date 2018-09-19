@@ -44,8 +44,8 @@ export class OrderDialogComponent implements OnInit {
       this.setTableHeaders();
     });
 
-    this.totalPrice = this.waiterCockpitService.getTotalPrice(this.data.orderLines);
-    this.datao = this.waiterCockpitService.orderComposer(this.data.orderLines);
+    this.totalPrice = this.data.orderLines[0].dish !== null ? this.waiterCockpitService.getTotalPrice(this.data.orderLines) : 0;
+    this.datao = this.data.orderLines[0].dish !== null ? this.waiterCockpitService.orderComposer(this.data.orderLines) : [];
     this.datat.push(this.data.booking);
     this.filter();
   }
