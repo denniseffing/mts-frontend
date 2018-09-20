@@ -41,6 +41,8 @@
       "logoutSuccess": "Abmeldung erfolgreich, komme bald wieder!"
     },
     "fetchMenusError": "Unsere Speisekarte ist derzeit leider nicht verfügbar.",
+    "fetchOrdersError": "Die Bestellungen können derzeit leider nicht abgerufen werden.",
+    "fetchReservationsError": "Die Reservierungen können derzeit leider nicht abgerufen werden.",
     "fetchMenusOfOrdersError": "Die Gerichte dieser Bestellung können derzeit leider nicht abgerufen werden.",
     "tryAgain": "Bitte versuchen Sie es später noch einmal."
   },

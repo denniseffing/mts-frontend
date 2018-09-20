@@ -1,5 +1,5 @@
 import { WaiterCockpitService } from '../shared/waiter-cockpit.service';
-import { ReservationView } from '../../shared/viewModels/interfaces';
+import { ReservationView, BookingResponse } from '../../shared/viewModels/interfaces';
 import { Component, OnInit } from '@angular/core';
 import {
   ITdDataTableSelectAllEvent,
@@ -14,6 +14,7 @@ import { FilterCockpit, Sorting, Pagination } from '../../shared/backendModels/i
 import { TranslateService } from '@ngx-translate/core';
 import { LangChangeEvent } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { LoadingWrapper } from '../../shared/loadingWrapper';
 
 @Component({
   selector: 'cockpit-reservation-cockpit',
@@ -31,6 +32,7 @@ export class ReservationCockpitComponent implements OnInit {
   };
 
   reservations: ReservationView;
+  reservationsLoadingWrapper: LoadingWrapper<BookingResponse[]>;
   totalReservations: number;
 
   columns: ITdDataTableColumn[];
@@ -72,11 +74,11 @@ export class ReservationCockpitComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.waiterCockpitService.getReservations(this.pagination, this.sorting, this.filters)
-      .subscribe((data: any) => {
-        this.reservations = data.result;
-        this.totalReservations = data.pagination.total;
-      });
+    this.reservationsLoadingWrapper = new LoadingWrapper(this.waiterCockpitService.getReservations(this.pagination, this.sorting, this.filters));
+    this.reservationsLoadingWrapper.data$.subscribe((data: any) => {
+      this.reservations = data.result;
+      this.totalReservations = data.pagination.total;
+    });
   }
 
   clearFilters(filters: any): void {

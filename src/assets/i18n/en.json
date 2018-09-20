@@ -39,6 +39,8 @@
       "logoutSuccess": "Log out successful, come back soon!"
     },
     "fetchMenusError": "Dishes are currently not available.",
+    "fetchOrdersError": "Orders are currently not available.",
+    "fetchReservationsError": "Reservations are currently not available.",
     "fetchMenusOfOrdersError": "The dishes of this order are currently not available.",
     "tryAgain": "Please try again later."
   },

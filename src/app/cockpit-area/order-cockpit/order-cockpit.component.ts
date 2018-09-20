@@ -8,11 +8,12 @@ import {
 import { MatDialog } from '@angular/material';
 import { WaiterCockpitService } from '../shared/waiter-cockpit.service';
 import { OrderDialogComponent } from './order-dialog/order-dialog.component';
-import { OrderListView } from '../../shared/viewModels/interfaces';
+import { OrderListView, OrderResponse } from '../../shared/viewModels/interfaces';
 import { config } from '../../config';
 import { Pagination, FilterCockpit } from '../../shared/backendModels/interfaces';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { LoadingWrapper } from '../../shared/loadingWrapper';
 
 @Component({
   selector: 'cockpit-order-cockpit',
@@ -31,6 +32,7 @@ export class OrderCockpitComponent implements OnInit {
   pageSize: number = 8;
 
   orders: OrderListView[];
+  ordersLoadingWrapper: LoadingWrapper<OrderResponse[]>;
   totalOrders: number;
 
   columns: ITdDataTableColumn[];
@@ -67,11 +69,11 @@ export class OrderCockpitComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.waiterCockpitService.getOrders(this.pagination, this.sorting, this.filters)
-      .subscribe((data: any) => {
-        this.orders = data.result;
-        this.totalOrders = data.pagination.total;
-      });
+    this.ordersLoadingWrapper = new LoadingWrapper(this.waiterCockpitService.getOrders(this.pagination, this.sorting, this.filters));
+    this.ordersLoadingWrapper.data$.subscribe((data: any) => {
+      this.orders = data.result;
+      this.totalOrders = data.pagination.total;
+    });
   }
 
   clearFilters(filters: any): void {

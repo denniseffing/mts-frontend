@@ -28,7 +28,7 @@
     </div>
   </form>
   <mat-progress-bar
-    *ngIf="!orders"
+    *ngIf="!orders && !(ordersLoadingWrapper.errorLoading$ | async)"
     color="accent"
     mode="indeterminate">
   </mat-progress-bar>
@@ -50,7 +50,14 @@
       </ng-template>
     </td-data-table>
     <div class="mat-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
-      <h3>{{'table.noResults' | translate}}.</h3>
+      <public-error-message 
+        title="alerts.fetchOrdersError" 
+        subtitle="alerts.tryAgain" 
+        *ngIf="ordersLoadingWrapper.errorLoading$ | async; else noResults">
+      </public-error-message>
+      <ng-template #noResults>
+        <h3>{{'table.noResults' | translate}}.</h3>
+      </ng-template>      
     </div>
     <td-paging-bar #pagingBar [pageSize]="pageSize" [total]="totalOrders" (change)="page($event)">
       <span hide-xs>{{'table.rowsPage' | translate}}:</span>
