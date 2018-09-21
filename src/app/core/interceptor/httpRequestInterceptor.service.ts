@@ -13,7 +13,7 @@ export class HttpRequestInterceptorService implements HttpInterceptor {
         const user: string = this.auth.getUser();
 
         if (authHeader) {
-            const authReq: HttpRequest<any> = req.clone({ setHeaders: { Authorization: authHeader, Username: user } });
+            const authReq: HttpRequest<any> = req.clone({ setHeaders: { Authorization: authHeader, 'Baggage-username': user } });
             return next.handle(authReq);
         } else {
             return next.handle(req);
