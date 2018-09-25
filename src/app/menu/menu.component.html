@@ -97,8 +97,11 @@
   </div>
 
   <ng-template #loadingOrError>
-    <div flex layout="row" *ngIf="menus.errorLoading$ | async; else loading" class="justify-space-around flex-wrap">
-      <public-error-message title="alerts.fetchMenusError" subtitle="alerts.tryAgain"></public-error-message>
+    <div flex layout="row" *ngIf="(menus.errorLoading$ | async) as error; else loading" class="justify-space-around flex-wrap">
+      <public-error-message *ngIf="error.status === 429; else genericError" title="alerts.rateLimitExceededError" subtitle="alerts.tryAgain"></public-error-message>
+      <ng-template #genericError>
+        <public-error-message title="alerts.fetchMenusError" subtitle="alerts.tryAgain"></public-error-message>
+      </ng-template>
     </div>
 
     <ng-template #loading>
